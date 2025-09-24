@@ -103,11 +103,11 @@ tracing-subscriber = { version = "0.3.20", features = [
 console-subscriber = { version = "0.4.1", optional = true }
 tracing = "0.1.41"
 wasm-opt = { version = "0.116.1", optional = true }
-ansi-to-tui = "8.0.0"
+ansi-to-tui = "7.0.0"
 ansi-to-html = "0.2.2"
 path-absolutize = "3.1.1"
 crossterm = { version = "0.29.0", features = ["event-stream"] }
-ratatui = { version = "0.30.0-alpha.5", features = ["crossterm", "unstable"] }
+ratatui = { git = "https://github.com/ratatui-org/ratatui", branch = "main", features = ["crossterm", "unstable"] }
 shell-words = "1.1.0"
 
 # disable `log` entirely since `walrus` uses it and is *much* slower with it enableda
