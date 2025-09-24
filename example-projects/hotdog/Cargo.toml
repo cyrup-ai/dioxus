@@ -11,7 +11,7 @@ dioxus = { path = "../../packages/dioxus", features = ["fullstack", "router"] }
 reqwest = { path = "../../../reqwest", features = ["json"] }
 serde = { version = "1.0.226", features = ["derive"] }
 serde_json = "1.0.145"
-rusqlite = { version = "0.37.0", optional = true }
+rusqlite = { version = "0.32.1", optional = true }
 
 [features]
 default = ["web"]

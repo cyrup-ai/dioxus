@@ -114,7 +114,7 @@ shell-words = "1.1.0"
 log = { version = "0.4", features = ["max_level_off", "release_max_level_off"] }
 
 # link intercept
-tempfile = "3.23.0"
+tempfile = "3.19.1"
 manganis = { path = "../manganis/manganis" }
 manganis-core = { path = "../manganis/manganis-core" }
 target-lexicon = { version = "0.13.3", features = ["serde", "serde_support"] }
