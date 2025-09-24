@@ -1,0 +1,59 @@
+[package]
+name = "dioxus-liveview"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/learn/0.6/getting_started"
+keywords = ["dom", "ui", "gui", "react", "liveview"]
+description = "Build server-side apps with Dioxus"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+thiserror = "2.0.16"
+tracing = "0.1.41"
+slab = "0.4.11"
+futures-util = { version = "0.3.31", default-features = false, features = [
+    "sink",
+] }
+futures-channel = "0.3.31"
+tokio = { version = "1.47.1", features = ["time", "macros"] }
+tokio-stream = { version = "0.1.17", features = ["net"] }
+tokio-util = { version = "0.7.16", features = ["rt"] }
+serde = { version = "1.0.226", features = ["derive"] }
+serde_json = "1.0.145"
+dioxus-html = { path = "../html", features = ["serialize"] }
+dioxus-document = { path = "../document" }
+dioxus-history = { path = "../history" }
+rustc-hash = "2.1.1"
+dioxus-core = { path = "../core", features = ["serialize"] }
+dioxus-interpreter-js = { path = "../interpreter", features = ["binary-protocol"] }
+dioxus-devtools = { path = "../devtools", optional = true }
+dioxus-cli-config = { path = "../cli-config" }
+generational-box = { path = "../generational-box" }
+
+# axum
+axum = { version = "0.8.4", optional = true, default-features = true, features = ["ws"] }
+
+[dev-dependencies]
+tokio = { version = "1.47.1", features = ["full"] }
+axum = { version = "0.8.4", features = ["ws"] }
+tower = "0.5.2"
+dioxus = { path = "../dioxus" }
+
+[features]
+default = ["devtools", "multi-thread"]
+axum = ["dep:axum"]
+multi-thread = ["tokio/rt-multi-thread"]
+devtools = ["dep:dioxus-devtools"]
+
+[[example]]
+name = "axum"
+required-features = ["axum"]
+doc-scrape-examples = true
+
+[[example]]
+name = "axum_stress"
+required-features = ["axum"]
+doc-scrape-examples = true

@@ -1,0 +1,31 @@
+# Copyright © SixtyFPS GmbH <info@slint.dev>
+# SPDX-License-Identifier: MIT
+
+[package]
+name = "wgpu-texture"
+version = "0.0.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[features]
+default = ["desktop"]
+desktop = ["dioxus/desktop"]
+native = ["dioxus/native"]
+tracing = ["dep:tracing-subscriber", "dioxus-native/tracing"]
+
+[dependencies]
+# Use our LOCAL forks - this is critical for testing our glyphon integration
+dioxus-native = { path = "../../packages/native" }
+dioxus = { path = "../../packages/dioxus" }
+
+# Use our LOCAL wgpu fork to match what our renderer expects
+wgpu = { path = "../../../wgpu/wgpu" }
+
+# Use our LOCAL anyrender_vello fork for the custom paint source
+anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
+
+# Latest crates.io versions for utilities
+bytemuck = "1.23.2"
+color = "0.3.2"
+tracing-subscriber = { version = "0.3.20", optional = true }

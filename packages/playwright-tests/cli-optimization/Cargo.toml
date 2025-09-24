@@ -1,0 +1,15 @@
+[package]
+name = "dioxus-cli-optimization-test"
+version = "0.0.1"
+edition = "2024"
+description = "Playwright test for Dioxus CLI optimization"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+dioxus = { path = "../../dioxus", features = ["web"] }
+
+[build-dependencies]
+reqwest = { path = "../../../../reqwest", features = ["blocking"] }
+flate2 = "1.1.2"
+tar = "0.4.44"

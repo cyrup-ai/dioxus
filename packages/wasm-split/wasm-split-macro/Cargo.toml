@@ -1,0 +1,22 @@
+[package]
+name = "wasm-split-macro"
+edition = "2024"
+version = "0.7.0-alpha.2"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+description = "macro crate for wasm-split - a tool for splitting up large WASM binaries into smaller chunks"
+repository = "https://github.com/DioxusLabs/dioxus/"
+license = "MIT OR Apache-2.0"
+keywords = ["wasm", "cli", "split", "dioxus"]
+
+
+[dependencies]
+syn = { version = "2.0.106", features = ["full"] }
+base16 = "0.2.1"
+digest = "0.11.0-rc.2"
+quote = "1.0.40"
+sha2 = "0.11.0-rc.2"
+proc-macro2 = "1.0.101"
+
+[lib]
+proc-macro = true

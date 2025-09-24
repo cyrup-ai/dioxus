@@ -1,0 +1,16 @@
+[package]
+name = "dioxus-devtools-types"
+edition = "2024"
+resolver = "3"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+description = "CLI Configuration for dioxus-cli"
+keywords = ["dom", "ui", "gui", "react", ]
+
+[dependencies]
+serde = { version = "1.0.226", features = ["derive"] }
+dioxus-core = { path = "../core", features = ["serialize"] }
+subsecond-types = { path = "../subsecond/subsecond-types" }

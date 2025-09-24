@@ -1,0 +1,13 @@
+[package]
+name = "dioxus-playwright-liveview-test"
+version = "0.0.1"
+edition = "2024"
+description = "Playwright test for Dioxus Liveview"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+dioxus = { path = "../../dioxus" }
+dioxus-liveview = { path = "../../liveview", features = ["axum"] }
+tokio = { version = "1.47.1", features = ["full"] }
+axum = { version = "0.8.4", default-features = false, features = ["ws"] }

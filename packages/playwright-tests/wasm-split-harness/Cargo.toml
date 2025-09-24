@@ -1,0 +1,31 @@
+[package]
+name = "wasm-split-harness"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+publish = false
+authors = ["Jonathan Kelley"]
+
+[dependencies]
+dioxus = { path = "../../dioxus", features = ["web", "router", "wasm-split"] }
+dioxus-router = { path = "../../router", features = ["wasm-split"] }
+anyhow = "1.0.100"
+async-compression = { version = "0.4.30", features = [
+    "futures-io",
+    "gzip",
+    "brotli",
+] }
+futures = "0.3.31"
+js-sys = "0.3.80"
+wasm-bindgen = "0.2.103"
+wasm-bindgen-futures = "0.4.53"
+web-sys = { version = "0.3.80", features = [
+    "Document",
+    "Window",
+    "HtmlElement",
+    "Text",
+    "DomRectReadOnly",
+    "console",
+] }
+getrandom = { version = "0.3.3", features = ["wasm_js"] }
+reqwest = { path = "../../../../reqwest", features = ["json"] }

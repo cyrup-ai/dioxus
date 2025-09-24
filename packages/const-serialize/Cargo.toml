@@ -1,0 +1,23 @@
+[package]
+name = "const-serialize"
+version = "0.7.0-alpha.2"
+authors = ["Evan Almloff"]
+edition = "2024"
+resolver = "3"
+description = "A serialization framework that works in const contexts"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/dioxuslabs/dioxus"
+homepage = "https://dioxuslabs.com/learn/0.5/getting_started"
+keywords = ["const", "serialize"]
+
+[dependencies]
+const-serialize-macro = { path = "../const-serialize-macro" }
+serde = { version = "1.0.226", features = ["derive"], optional = true }
+
+[dev-dependencies]
+const-serialize = { path = "." }
+rand = "0.9.2"
+
+[features]
+test-big-endian = []
+serde = ["dep:serde"]

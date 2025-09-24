@@ -1,0 +1,25 @@
+[package]
+name = "native-headless"
+version = "0.0.0"
+edition = "2024"
+resolver = "3"
+license = "MIT"
+publish = false
+
+[features]
+tracing = ["dep:tracing-subscriber", "dioxus-native-dom/tracing"]
+
+[dependencies]
+dioxus = { path = "../../packages/dioxus", default-features = false, features = ["html", "hooks", "signals"] }
+dioxus-native-dom = { path = "../../packages/native-dom" }
+anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
+vello = { path = "../../../vello" }
+rustc-hash = "2"
+futures-util = "0.3.31"
+tracing-subscriber = { version = "0.3.20", optional = true }
+wgpu = { path = "../../../wgpu/wgpu" }
+pollster = "0.4"
+bytemuck = "1"
+blitz-paint = { path = "../../../blitz/packages/blitz-paint", default-features = true }
+blitz-traits = { path = "../../../blitz/packages/blitz-traits", default-features = true }
+blitz-dom = { path = "../../../blitz/packages/blitz-dom", default-features = true }

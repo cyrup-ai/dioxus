@@ -1,0 +1,29 @@
+[package]
+name = "dioxus-document"
+edition = "2024"
+resolver = "3"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+description = "CLI Configuration for dioxus-cli"
+keywords = ["dom", "ui", "gui", "react"]
+
+[dependencies]
+dioxus-core = { path = "../core" }
+dioxus-core-types = { path = "../core-types" }
+dioxus-core-macro = { path = "../core-macro" }
+dioxus-html = { path = "../html" }
+tracing = "0.1.41"
+serde = "1.0.226"
+serde_json = "1.0.145"
+futures-channel = "0.3.31"
+futures-util = "0.3.31"
+generational-box = { path = "../generational-box" }
+
+[build-dependencies]
+lazy-js-bundle = { path = "../lazy-js-bundle" }
+
+[dev-dependencies]
+dioxus = { path = "../dioxus" }

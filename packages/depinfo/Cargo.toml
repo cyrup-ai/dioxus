@@ -1,0 +1,15 @@
+[package]
+name = "depinfo"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+description = "Depinfo parser for Rust"
+keywords = ["rustc", "cargo", "dep-info" ]
+
+[dependencies]
+thiserror = "2.0.16"
+

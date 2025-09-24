@@ -1,0 +1,18 @@
+[package]
+name = "dioxus-playwright-fullstack-test"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { path = "../../dioxus", features = ["fullstack"] }
+futures = "0.3.31"
+serde = "1.0.226"
+tokio = { version = "1.47.1", features = ["full"], optional = true }
+
+[features]
+default = []
+server = ["dioxus/server", "dep:tokio"]
+web = ["dioxus/web"]

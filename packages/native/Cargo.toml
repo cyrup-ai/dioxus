@@ -1,0 +1,61 @@
+[package]
+name = "dioxus-native"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Nico Burns"]
+edition = "2024"
+resolver = "3"
+description = "Native renderer for Dioxus based on blitz"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/learn/0.6/getting_started"
+keywords = ["dom", "ui", "gui", "react"]
+
+[features]
+default = ["accessibility", "hot-reload", "tracing", "net", "svg", "system-fonts", "openssl-vendored-android"]
+svg = ["blitz-dom/svg", "blitz-paint/svg"]
+net = ["dep:tokio", "dep:blitz-net"]
+accessibility = ["blitz-shell/accessibility", "blitz-dom/accessibility"]
+tracing = ["dep:tracing", "blitz-shell/tracing", "blitz-dom/tracing"]
+hot-reload = ["dep:dioxus-cli-config", "dep:dioxus-devtools"]
+system-fonts = ["blitz-dom/system_fonts"]
+openssl-vendored-android = ["openssl"]
+autofocus = []
+
+[dependencies]
+# Blitz dependencies
+anyrender = { path = "../../../blitz/packages/anyrender" }
+anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
+blitz-dom = { path = "../../../blitz/packages/blitz-dom" }
+blitz-net = { path = "../../../blitz/packages/blitz-net", optional = true }
+blitz-paint = { path = "../../../blitz/packages/blitz-paint", optional = true }
+blitz-traits = { path = "../../../blitz/packages/blitz-traits" }
+blitz-shell = { path = "../../../blitz/packages/blitz-shell" }
+
+# DioxusLabs dependencies
+dioxus-core = { path = "../core" }
+dioxus-html = { path = "../html" }
+dioxus-native-dom = { path = "../native-dom" }
+dioxus-asset-resolver = { path = "../asset-resolver" }
+dioxus-cli-config = { path = "../cli-config", optional = true }
+dioxus-devtools = { path = "../devtools", optional = true }
+dioxus-history = { path = "../history" }
+dioxus-document = { path = "../document" }
+
+# Windowing & Input
+winit = "0.30.12"
+keyboard-types = { version = "0.8.1" }
+
+# IO & Networking
+tokio = { version = "1.47.1", features = ["rt-multi-thread"], optional = true }
+
+# Other dependencies
+tracing = { version = "0.1.41", optional = true }
+rustc-hash = "2.1.1"
+futures-util = "0.3.31"
+
+[target.'cfg(target_os = "android")'.dependencies]
+openssl = { version = "0.10", features = ["vendored"], optional = true }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

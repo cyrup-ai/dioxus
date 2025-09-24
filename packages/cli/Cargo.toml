@@ -1,0 +1,179 @@
+[package]
+name = "dioxus-cli"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley"]
+edition = "2024"
+description = "CLI for building fullstack web, desktop, and mobile apps with a single codebase."
+repository = "https://github.com/DioxusLabs/dioxus/"
+license = "MIT OR Apache-2.0"
+keywords = ["mobile", "gui", "cli", "dioxus", "wasm"]
+
+[dependencies]
+dioxus-autofmt = { path = "../autofmt" }
+dioxus-check = { path = "../check" }
+dioxus-rsx-rosetta = { path = "../rsx-rosetta" }
+dioxus-rsx = { path = "../rsx" }
+dioxus-rsx-hotreload = { path = "../rsx-hotreload" }
+dioxus-html = { path = "../html", features = ["hot-reload-context"] }
+dioxus-core = { path = "../core", features = ["serialize"] }
+dioxus-core-types = { path = "../core-types" }
+dioxus-devtools-types = { path = "../devtools-types" }
+dioxus-cli-config = { path = "../cli-config" }
+dioxus-cli-opt = { path = "../cli-opt" }
+dioxus-fullstack = { path = "../fullstack" }
+dioxus-dx-wire-format = { path = "../dx-wire-format" }
+wasm-split-cli = { path = "../wasm-split/wasm-split-cli" }
+depinfo = { path = "../depinfo" }
+subsecond-types = { path = "../subsecond/subsecond-types" }
+
+clap = { version = "4.5.48", features = ["derive", "cargo"] }
+convert_case = "0.8.0"
+thiserror = "2.0.16"
+uuid = { version = "1.18.1", features = ["v4"] }
+serde = { version = "1.0.226", features = ["derive"] }
+serde_json = "1.0.145"
+toml = "0.9.7"
+cargo_toml = { version = "0.22.3", features = ["features"] }
+futures-util = { version = "0.3.31", features = ["async-await-macro"] }
+notify = { version = "8.2.0", features = ["serde"] }
+html_parser = "0.7.0"
+cargo_metadata = "0.22.0"
+tokio = { version = "1.47.1", features = ["full"] }
+tokio-stream = "0.1.17"
+tokio-tungstenite = "0.27.0"
+chrono = "0.4.42"
+anyhow = "1.0.100"
+hyper = "1.7.0"
+hyper-util = "0.1.17"
+hyper-rustls = "0.27.7"
+rustls = "0.23.32"
+rayon = "1.11.0"
+futures-channel = "0.3.31"
+krates = "0.20.0"
+regex = "1.11.2"
+console = "0.16.1"
+ctrlc = "3.5.0"
+
+axum = { version = "0.8.4", default-features = true, features = ["ws"] }
+axum-server = { version = "0.7.2", features = ["tls-rustls"] }
+axum-extra = { version = "0.10.1", features = ["typed-header"] }
+tower-http = { version = "0.6.6", features = ["full"] }
+proc-macro2 = { version = "1.0.101", features = ["span-locations"] }
+syn = { version = "2.0.106", features = [
+    "full",
+    "extra-traits",
+    "visit",
+    "visit-mut",
+] }
+
+headers = "0.4.1"
+walkdir = "2"
+dunce = "1.0.5"
+
+# tools download
+dirs = "6.0.0"
+reqwest = { path = "../../../reqwest", features = ["rustls-tls", "trust-dns", "json"] }
+tower = "0.5.2"
+
+# path lookup
+which = { version = "8.0.0" }
+
+# plugin packages
+open = "5.3.2"
+cargo-generate = "0.23.5"
+toml_edit = "0.23.6"
+
+# formatting
+# syn = { workspace = true }
+prettyplease = "0.2.37"
+
+# Assets
+brotli = "8.0.2"
+ignore = "0.4.23"
+env_logger = "0.11.8"
+const-serialize = { path = "../const-serialize", features = ["serde"] }
+
+tracing-subscriber = { version = "0.3.20", features = [
+    "std",
+    "env-filter",
+    "json",
+    "registry",
+    "fmt",
+] }
+console-subscriber = { version = "0.4.1", optional = true }
+tracing = "0.1.41"
+wasm-opt = { version = "0.116.1", optional = true }
+ansi-to-tui = "7.0.0"
+ansi-to-html = "0.2.2"
+path-absolutize = "3.1.1"
+crossterm = { version = "0.29.0", features = ["event-stream"] }
+ratatui = { version = "0.30.0-alpha.5", features = ["crossterm", "unstable"] }
+shell-words = "1.1.0"
+
+# disable `log` entirely since `walrus` uses it and is *much* slower with it enableda
+log = { version = "0.4", features = ["max_level_off", "release_max_level_off"] }
+
+# link intercept
+tempfile = "3.23.0"
+manganis = { path = "../manganis/manganis" }
+manganis-core = { path = "../manganis/manganis-core" }
+target-lexicon = { version = "0.13.3", features = ["serde", "serde_support"] }
+wasm-encoder = "0.239.0"
+
+# Extracting data from an executable
+object = { version = "0.37.3", features = ["all"] }
+tokio-util = { version = "0.7.16", features = ["full"] }
+itertools = "0.14.0"
+throbber-widgets-tui = "0.9.0"
+unicode-segmentation = "1.12.0"
+handlebars = "6.3.2"
+strum = { version = "0.27.2", features = ["derive"] }
+memmap = "0.7.0"
+walrus = { version = "0.23.3", features = ["parallel"] }
+wasmparser = "0.239.0"
+
+tauri-utils = { version = "=2.7.0" }
+tauri-bundler = { version = "=2.6.1" }
+include_dir = "0.7.4"
+flate2 = "1.1.2"
+tar = "0.4.44"
+local-ip-address = "0.6.5"
+dircpy = "0.3.19"
+plist = "1.8.0"
+memoize = "0.5.1"
+backtrace = "0.3.75"
+ar = "0.9.0"
+wasm-bindgen-externref-xform = "0.2.100"
+pdb = "0.8.0"
+self_update = { version = "0.42.0", features = [
+    "archive-tar",
+    "archive-zip",
+    "compression-flate2",
+    "compression-zip-deflate",
+] }
+self-replace = "1.5.0"
+cargo-config2 = "0.1.36"
+
+[build-dependencies]
+built = { version = "0.8.0", features = ["git2"] }
+
+[features]
+default = []
+tokio-console = ["dep:console-subscriber", "tokio/tracing"]
+no-downloads = []
+
+[[bin]]
+path = "src/main.rs"
+name = "dx"
+
+[dev-dependencies]
+escargot = "0.5"
+
+[package.metadata.binstall]
+pkg-url = "{ repo }/releases/download/v{ version }/dx-{ target }{ archive-suffix }"
+pkg-fmt = "zip"
+
+[package.metadata.docs.rs]
+all-features = false
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs"]

@@ -1,0 +1,126 @@
+[package]
+name = "dioxus"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Dioxus Labs", "ealmloff"]
+edition = "2024"
+description = "Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["web", "desktop", "mobile", "gui", "wasm"]
+
+[dependencies]
+dioxus-core = { path = "../core" }
+dioxus-config-macros = { path = "../config-macros" }
+dioxus-html = { path = "../html", default-features = false, optional = true }
+dioxus-document = { path = "../document", optional = true }
+dioxus-history = { path = "../history", optional = true }
+dioxus-core-macro = { path = "../core-macro", optional = true }
+dioxus-config-macro = { path = "../config-macro", optional = true }
+dioxus-hooks = { path = "../hooks", optional = true }
+dioxus-signals = { path = "../signals", optional = true }
+dioxus-router = { path = "../router", optional = true }
+dioxus-web = { path = "../web", default-features = false, optional = true }
+dioxus-desktop = { path = "../desktop", default-features = true, optional = true }
+dioxus-fullstack = { path = "../fullstack", default-features = true, optional = true }
+dioxus-liveview = { path = "../liveview", optional = true }
+dioxus-server = { path = "../server", optional = true }
+dioxus-ssr = { path = "../ssr", optional = true }
+dioxus-native = { path = "../native", optional = true }
+dioxus_server_macro = { path = "../server-macro", optional = true }
+manganis = { path = "../manganis/manganis", features = ["dioxus"], optional = true }
+dioxus-logger = { path = "../logger", optional = true }
+warnings = { version = "0.2.1", optional = true }
+wasm-splitter = { path = "../wasm-split/wasm-split", optional = true }
+subsecond = { path = "../subsecond/subsecond" }
+
+serde = { version = "1.0.226", optional = true }
+dioxus-cli-config = { path = "../cli-config", optional = true }
+dioxus-devtools = { path = "../devtools", optional = true }
+
+[features]
+default = [
+  "launch",
+  "devtools",
+  "logger",
+  "lib"
+]
+# All features recommended for use in libraries
+lib = [
+  "macro",
+  "html",
+  "signals",
+  "hooks",
+  "mounted",
+  "file_engine",
+  "document",
+  "asset",
+  "warnings",
+  "cli-config",
+]
+# The minimal set of features required to use dioxus renderers for minimal binary size
+minimal = ["macro", "html", "signals", "hooks", "launch"]
+signals = ["dep:dioxus-signals"]
+macro = ["dep:dioxus-core-macro"]
+html = ["dep:dioxus-html"]
+hooks = ["dep:dioxus-hooks"]
+devtools = ["dep:dioxus-devtools", "dioxus-web?/devtools", "dioxus-fullstack?/devtools"]
+mounted = ["dioxus-web?/mounted"]
+file_engine = ["dioxus-web?/file_engine"]
+asset = ["dep:manganis"]
+document = ["dioxus-web?/document", "dep:dioxus-document", "dep:dioxus-history"]
+logger = ["dep:dioxus-logger"]
+cli-config = ["dep:dioxus-cli-config"]
+warnings = ["dep:warnings"]
+wasm-split = [
+  "dep:wasm-splitter",
+  "dioxus-config-macros/wasm-split",
+] # note: to turn on the router splitter, you need to manually enable wasm-split on the router
+
+launch = ["dep:dioxus-config-macro"]
+router = ["dep:dioxus-router"]
+
+# Platforms
+fullstack = ["dep:dioxus-fullstack", "dioxus-config-macro/fullstack", "dep:serde"]
+desktop = ["dep:dioxus-desktop", "dioxus-fullstack?/desktop", "dioxus-config-macro/desktop"]
+mobile = ["dep:dioxus-desktop", "dioxus-fullstack?/mobile", "dioxus-config-macro/mobile"]
+web = [
+  "dep:dioxus-web",
+  "dioxus-fullstack?/web",
+  "dioxus-config-macro/web",
+  "dep:dioxus-cli-config",
+  "dioxus-cli-config?/web",
+]
+ssr = ["dep:dioxus-ssr", "dioxus-config-macro/ssr"]
+liveview = ["dep:dioxus-liveview", "dioxus-config-macro/liveview"]
+native = ["dep:dioxus-native"] # todo(jon): decompose the desktop crate such that "webview" is the default and native is opt-in
+server = [
+  "dep:dioxus-server",
+  "dep:dioxus_server_macro",
+  "dioxus_server_macro/server",
+  "dioxus_server_macro/axum",
+  "ssr",
+  "dioxus-liveview?/axum",
+  "dioxus-fullstack?/server",
+]
+
+# This feature just disables the no-renderer-enabled warning
+third-party-renderer = []
+
+[dev-dependencies]
+futures-util = "0.3.31"
+tracing = "0.1.41"
+rand = { version = "0.9.2", features = ["small_rng"] }
+criterion = "0.7.0"
+thiserror = "2.0.16"
+env_logger = "0.11.8"
+tokio = { version = "1.47.1", features = ["full"] }
+dioxus = { path = "." }
+
+[[bench]]
+name = "jsframework"
+harness = false
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+features = ["router", "ssr", "web", "fullstack", "signals", "hooks", "html", "liveview", "server", "warnings"]
