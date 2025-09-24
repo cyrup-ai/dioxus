@@ -1,0 +1,150 @@
+[package]
+name = "dioxus-desktop"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley"]
+edition = "2024"
+resolver = "3"
+description = "WebView renderer for Dioxus"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/learn/0.6/getting_started"
+keywords = ["dom", "ui", "gui", "react"]
+
+
+[dependencies]
+dioxus-core = { path = "../core", features = ["serialize"] }
+dioxus-html = { path = "../html", features = ["serialize", "mounted", "file_engine"] }
+dioxus-document = { path = "../document" }
+dioxus-signals = { path = "../signals", optional = true }
+dioxus-interpreter-js = { path = "../interpreter", features = ["binary-protocol", "serialize"] }
+dioxus-cli-config = { path = "../cli-config" }
+dioxus-asset-resolver = { path = "../asset-resolver" }
+generational-box = { path = "../generational-box" }
+dioxus-devtools = { path = "../devtools", optional = true }
+
+serde = "1.0.226"
+serde_json = "1.0.145"
+thiserror = "2.0.16"
+tracing = "0.1.41"
+wry = { path = "../../../wry", default-features = false, features = ["os-webview", "protocol", "drag-drop"] }
+futures-channel = "0.3.31"
+tokio = { version = "1.47.1", features = [
+  "sync",
+  "rt-multi-thread",
+  "rt",
+  "time",
+  "macros",
+  "fs",
+  "io-util",
+], optional = true }
+infer = "0.19.0"
+dunce = "1.0.5"
+slab = "0.4.11"
+rustc-hash = "2.1.1"
+dioxus-hooks = { path = "../hooks" }
+futures-util = "0.3.31"
+percent-encoding = "2.3.2"
+async-trait = "0.1.89"
+tao = { path = "../../../tao", features = ["rwh_05"] }
+dioxus-history = { path = "../history" }
+base64 = "0.22.1"
+libc = "0.2.176"
+rand = { version = "0.9.2", features = ["std_rng"] }
+subtle = { version = "2.6", features = ["const-generics"] }
+webbrowser = { version = "1.0" }
+
+[target.'cfg(unix)'.dependencies]
+signal-hook = "0.3.18"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+wry = { path = "../../../wry", features = ["os-webview", "protocol", "drag-drop", "linux-body"] }
+
+[target.'cfg(any(target_os = "windows",target_os = "macos",target_os = "linux",target_os = "dragonfly", target_os = "freebsd", target_os = "netbsd", target_os = "openbsd"))'.dependencies]
+global-hotkey = "0.7.0"
+rfd = { version = "0.15.4", default-features = false, features = ["xdg-portal", "tokio"] }
+muda = "0.17.1"
+
+[target.'cfg(any(target_os = "windows",target_os = "macos",target_os = "linux"))'.dependencies]
+tray-icon = "0.21.1"
+
+[target.'cfg(target_os = "ios")'.dependencies]
+objc = "0.2.7"
+objc_id = "0.1.1"
+
+# use rustls on android
+[target.'cfg(target_os = "android")'.dependencies]
+tungstenite = { version = "0.27.0", features = ["rustls"] }
+jni = "0.21.1"
+ndk = { version = "0.9.0" }
+ndk-sys = { version = "0.6.0" }
+ndk-context = { version = "0.1.1" }
+
+# The `openssl` dependency generally does not know how to cross-compile for Android. To make the lives
+# of our users easier, we automatically enable the `openssl` feature when building for Android.
+# Feature are additive, so users will need to "subtract" this feature if they do not want it.
+openssl = { version = "0.10", features = ["vendored"], optional = true }
+
+# use native tls on other platforms
+[target.'cfg(not(target_os = "android"))'.dependencies]
+tungstenite = { version = "0.27.0", features = ["native-tls"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+cocoa = "0.26.1"
+core-foundation = "0.10.1"
+objc = "0.2.7"
+
+[build-dependencies]
+lazy-js-bundle = { path = "../lazy-js-bundle" }
+
+[features]
+default = ["tokio_runtime", "transparent", "devtools", "openssl-vendored-android"]
+tokio_runtime = ["dep:tokio"]
+fullscreen = ["wry/fullscreen"]
+devtools = ["wry/devtools", "dep:dioxus-devtools", "dioxus-signals"]
+transparent = ["wry/transparent"]
+openssl-vendored-android = ["openssl"]
+gnu = []
+
+[package.metadata.docs.rs]
+features = ["tokio_runtime", "devtools"]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+default-features = false
+targets = [
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "aarch64-apple-darwin",
+  "aarch64-apple-ios",
+  "aarch64-linux-android",
+  "armv7-linux-androideabi",
+]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dev-dependencies]
+dioxus = { path = "../dioxus", features = ["desktop"] }
+exitcode = "1.1.2"
+reqwest = { path = "../../../reqwest", features = ["json"] }
+http-range = { version = "0.1.5" }
+dioxus-ssr = { path = "../ssr", default-features = false }
+separator = "0.4.1"
+
+# These tests need to be run on the main thread, so they cannot use rust's test harness.
+[[test]]
+name = "check_events"
+path = "headless_tests/events.rs"
+harness = false
+
+[[test]]
+name = "check_rendering"
+path = "headless_tests/rendering.rs"
+harness = false
+
+[[test]]
+name = "check_forms"
+path = "headless_tests/forms.rs"
+harness = false
+
+[[test]]
+name = "check_eval"
+path = "headless_tests/eval.rs"
+harness = false

@@ -1,0 +1,37 @@
+[package]
+name = "dioxus_server_macro"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/docs/0.5/guide/en/getting_started/fullstack.html"
+keywords = ["dom", "ui", "gui", "react", "liveview"]
+authors = ["Jonathan Kelley", "Evan Almloff"]
+license = "MIT OR Apache-2.0"
+description = "Server function macros for Dioxus"
+
+[dependencies]
+proc-macro2 = "1.0.101"
+quote = "1.0.40"
+syn = { version = "2.0.106", features = ["full"] }
+server_fn_macro = "0.8.7"
+
+
+[dev-dependencies]
+dioxus = { path = "../dioxus", features = ["fullstack"] }
+serde = { version = "1.0.226", features = ["derive"] }
+tower-http = { version = "0.6.6", features = ["timeout"] }
+axum = "0.8.4"
+
+[lib]
+proc-macro = true
+
+[features]
+axum = ["server_fn_macro/axum"]
+server = ["server_fn_macro/ssr"]
+browser = []
+reqwest = ["server_fn_macro/reqwest"]
+generic = ["server_fn_macro/generic"]
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

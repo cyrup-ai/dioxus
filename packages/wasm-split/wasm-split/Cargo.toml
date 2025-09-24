@@ -1,0 +1,15 @@
+[package]
+name = "wasm-splitter"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+description = "A tool for splitting up large WASM binaries into smaller chunks"
+repository = "https://github.com/DioxusLabs/dioxus/"
+license = "MIT OR Apache-2.0"
+keywords = ["wasm", "cli", "split", "dioxus"]
+
+
+[dependencies]
+async-once-cell = { version = "0.5.4", features = ["std"] }
+wasm-split-macro = { path = "../wasm-split-macro" }

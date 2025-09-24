@@ -1,0 +1,21 @@
+[package]
+name = "dioxus-check"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+authors = ["Dioxus Labs"]
+description = "Checks Dioxus RSX files for issues"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["web", "desktop", "mobile", "gui", "wasm"]
+
+[dependencies]
+proc-macro2 = { version = "1.0.101", features = ["span-locations"] }
+quote = "1.0.40"
+syn = { version = "2.0.106", features = ["full", "extra-traits", "visit"] }
+owo-colors = { version = "4.2.2", features = ["supports-colors"] }
+
+[dev-dependencies]
+indoc = "2.0.6"
+pretty_assertions = "1.4.1"

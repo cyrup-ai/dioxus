@@ -1,0 +1,31 @@
+[package]
+name = "dioxus-rsx-rosetta"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+description = "Autofomatter for Dioxus RSX"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+documentation = "https://dioxuslabs.com"
+keywords = ["dom", "ui", "gui", "react"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus-autofmt = { path = "../autofmt" }
+dioxus-rsx = { path = "../rsx" }
+dioxus-html = { path = "../html", features = ["html-to-rsx"] }
+html_parser = "0.7.0"
+proc-macro2 = "1.0.101"
+quote = "1.0.40"
+syn = { version = "2.0.106", features = ["full"] }
+convert_case = "0.8.0"
+htmlentity = "1.3.2"
+
+[dev-dependencies]
+pretty_assertions = "1.4.1"
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

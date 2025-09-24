@@ -1,0 +1,22 @@
+[package]
+name = "dioxus-ssr"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley"]
+edition = "2024"
+resolver = "3"
+description = "Dioxus render-to-string"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+keywords = ["dom", "ui", "gui", "react", "ssr"]
+
+[dependencies]
+dioxus-core = { path = "../core", features = ["serialize"] }
+dioxus-core-types = { path = "../core-types" }
+askama_escape = "0.13.0"
+rustc-hash = "2.1.1"
+
+[dev-dependencies]
+dioxus = { path = "../dioxus" }
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

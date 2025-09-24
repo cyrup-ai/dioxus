@@ -1,0 +1,62 @@
+[package]
+name = "dioxus-router"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+description = "Cross-platform router for Dioxus apps"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["dom", "ui", "gui", "react", "wasm"]
+
+[dependencies]
+dioxus-core = { path = "core" }
+dioxus-core-macro = { path = "core-macro" }
+dioxus-signals = { path = "signals" }
+dioxus-hooks = { path = "hooks" }
+dioxus-html = { path = "html", optional = true }
+dioxus-history = { path = "history" }
+dioxus-router-macro = { path = "router-macro" }
+dioxus-fullstack-hooks = { path = "fullstack-hooks", optional = true }
+tracing = "0.1.41"
+percent-encoding = "2.3.1"
+url = "2.5.4"
+dioxus-cli-config = { path = "cli-config" }
+rustversion = "1.0.21"
+
+[features]
+default = ["html"]
+streaming = ["dep:dioxus-fullstack-hooks"]
+wasm-split = []
+html = ["dep:dioxus-html"]
+
+[dev-dependencies]
+axum = { version = "0.8.4", features = ["ws"] }
+dioxus = { path = "dioxus", features = ["router"] }
+dioxus-ssr = { path = "ssr" }
+criterion = { version = "0.7.0", features = ["async_tokio", "html_reports"] }
+ciborium = "0.2.2"
+base64 = "0.22.1"
+serde = { version = "1.0.219", features = ["derive"] }
+tokio = { version = "1.47.0", features = ["full"] }
+dioxus-router = { path = "." }
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+
+# Most of the examples live in the workspace. We include some here so that docs.rs can scrape our examples for better inline docs
+[[example]]
+name = "hash_fragment_state"
+path = "../../examples/hash_fragment_state.rs"
+doc-scrape-examples = true
+
+[[example]]
+name = "query_segment_search"
+path = "../../examples/query_segment_search.rs"
+doc-scrape-examples = true
+
+[[example]]
+name = "simple_router"
+path = "../../examples/simple_router.rs"
+doc-scrape-examples = true

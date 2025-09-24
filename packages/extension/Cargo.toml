@@ -1,0 +1,18 @@
+[package]
+name = "dioxus-ext"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wasm-bindgen = "0.2.103"
+dioxus-autofmt = { path = "../autofmt" }
+dioxus-rsx-rosetta = { path = "../rsx-rosetta" }
+html_parser = "0.7.0"
+syn = "2.0.106"
+
+[lib]
+crate-type = ["cdylib", "rlib"]

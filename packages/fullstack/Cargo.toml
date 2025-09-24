@@ -1,0 +1,110 @@
+[package]
+name = "dioxus-fullstack"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+version = "0.7.0-alpha.2"
+edition = "2024"
+description = "Fullstack utilities for Dioxus: Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["web", "desktop", "mobile", "gui", "server"]
+resolver = "3"
+
+[dependencies]
+# server functions
+server_fn = { version = "0.8.7", default-features = false }
+dioxus_server_macro = { path = "../server-macro" }
+
+# axum
+axum = { version = "0.8.4", optional = true }
+tower-http = { version = "0.6.6", optional = true, features = ["fs"] }
+
+dioxus-core = { path = "../core" }
+dioxus-document = { path = "../document" }
+generational-box = { path = "../generational-box" }
+
+# Dioxus + SSR
+dioxus-server = { path = "../server", optional = true}
+dioxus-isrg = { path = "../isrg", optional = true }
+dioxus-router = { path = "../router", features = ["streaming"], optional = true }
+dioxus-fullstack-hooks = { path = "../fullstack-hooks" }
+dioxus-fullstack-protocol = { path = "../fullstack-protocol" }
+
+# Web Integration
+dioxus-web = { path = "../web", features = ["hydrate"], default-features = false, optional = true }
+dioxus-interpreter-js = { path = "../interpreter", optional = true }
+
+# Desktop Integration
+dioxus-desktop = { path = "../desktop", optional = true }
+
+tracing = "0.1.41"
+tracing-futures = { version = "0.2.5", optional = true }
+tokio-util = { version = "0.7.16", features = ["rt"], optional = true }
+async-trait = { version = "0.1.89", optional = true }
+
+serde = "1.0.226"
+tokio-stream = { version = "0.1.17", features = ["sync"], optional = true }
+futures-util = "0.3.31"
+futures-channel = "0.3.31"
+ciborium = "0.2.2"
+base64 = "0.22.1"
+rustls = { version = "0.23.32", optional = true }
+hyper-rustls = { version = "0.27.7", optional = true }
+
+pin-project = { version = "1.1.10", optional = true }
+thiserror = { version = "2.0.16", optional = true }
+bytes = "1.10.1"
+tower = { version = "0.5.2", features = ["util"], optional = true }
+tower-layer = { version = "0.3.3", optional = true }
+parking_lot = { version = "0.12.4", features = ["send_guard"], optional = true }
+web-sys = { version = "0.3.80", optional = true, features = [
+  "Window",
+  "Document",
+  "Element",
+  "HtmlDocument",
+  "Storage",
+  "console",
+] }
+
+dioxus-cli-config = { path = "../cli-config", optional = true }
+
+dioxus-devtools = { path = "../devtools", optional = true }
+aws-lc-rs = { version = "1.14.0", optional = true }
+dioxus-history = { path = "../history" }
+http = "1.3.1"
+
+[dev-dependencies]
+dioxus = { path = "../dioxus", features = ["fullstack"] }
+tokio = { version = "1.47.1", features = ["full"] }
+
+[features]
+default = ["devtools", "document", "file_engine", "mounted"]
+devtools = ["dioxus-web?/devtools", "dep:dioxus-devtools"]
+mounted = ["dioxus-web?/mounted"]
+file_engine = ["dioxus-web?/file_engine"]
+document = ["dioxus-web?/document"]
+web = ["dep:dioxus-web", "dep:web-sys", "dioxus-fullstack-hooks/web", "server_fn/browser", "dioxus_server_macro/browser"]
+desktop = ["server_fn/reqwest", "dioxus_server_macro/reqwest"]
+mobile = ["server_fn/reqwest", "dioxus_server_macro/reqwest"]
+default-tls = ["server_fn/default-tls"]
+rustls = ["server_fn/rustls", "dep:rustls", "dep:hyper-rustls"]
+server = [
+    "server-core" ,
+    "default-tls",
+    "server_fn/axum",
+]
+server-core = [
+    "server_fn/axum-no-default",
+    "dioxus_server_macro/axum",
+    "server_fn/reqwest",
+    "server_fn/ssr",
+    "dioxus_server_macro/reqwest",
+    "dioxus-fullstack-hooks/server",
+    "dep:dioxus-server",
+    "dioxus-interpreter-js",
+]
+aws-lc-rs = ["dep:aws-lc-rs"]
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+features = ["axum", "web", "aws-lc-rs"]

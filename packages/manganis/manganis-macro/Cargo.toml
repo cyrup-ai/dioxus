@@ -1,0 +1,29 @@
+[package]
+name = "manganis-macro"
+version = "0.7.0-alpha.2"
+edition = "2024"
+authors = ["Evan Almloff"]
+description = "Ergonomic, automatic, cross crate asset collection and optimization"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/manganis/"
+homepage = "https://dioxuslabs.com"
+keywords = ["assets"]
+
+[lib]
+proc-macro = true
+
+# be careful with dependencies you add here - these need to get compiled for the proc macro and therefore
+# prevent the main code from compiling!
+[dependencies]
+proc-macro2 = "1.0.101"
+quote = "1.0.40"
+syn = { version = "2.0.106", features = ["full", "extra-traits"] }
+manganis-core = { path = "../manganis-core" }
+dunce = "1.0.5"
+macro-string = "0.1.4"
+
+[features]
+default = []
+
+[dev-dependencies]
+manganis = { path = "../manganis" }

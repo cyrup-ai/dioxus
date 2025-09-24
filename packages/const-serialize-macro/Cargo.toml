@@ -1,0 +1,19 @@
+[package]
+name = "const-serialize-macro"
+version = "0.7.0-alpha.2"
+authors = ["Evan Almloff"]
+edition = "2024"
+resolver = "3"
+description = "A macro to derive const serialize"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/dioxuslabs/dioxus"
+homepage = "https://dioxuslabs.com/learn/0.5/getting_started"
+keywords = ["const", "serialize"]
+
+[dependencies]
+syn = "2.0.106"
+quote = "1.0.40"
+proc-macro2 = "1.0.101"
+
+[lib]
+proc-macro = true

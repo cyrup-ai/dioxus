@@ -1,0 +1,195 @@
+#![doc = include_str!("../README.md")]
+#![feature(error_generic_member_access)]
+#![feature(trait_alias)]
+#![feature(coroutines)]
+#![feature(try_blocks)]
+//! ## Dioxus Crate Features
+//!
+//! This crate has several features that can be enabled to change the active renderer and enable various integrations:
+//!
+//! - `signals`: (default) re-exports `dioxus-signals`
+//! - `macro`: (default) re-exports `dioxus-macro`
+//! - `html`: (default) exports `dioxus-html` as the default elements to use in rsx
+//! - `hooks`: (default) re-exports `dioxus-hooks`
+//! - `hot-reload`: (default) enables hot rsx reloading in all renderers that support it
+//! - `router`: exports the [router](https://dioxuslabs.com/learn/0.6/router) and enables any router features for the current platform
+//! - `third-party-renderer`: Just disables warnings about no active platform when no renderers are enabled
+//! - `logger`: Enable the default tracing subscriber for Dioxus apps
+//!
+//! Platform features (the current platform determines what platform the [`launch()`] function runs):
+//!
+//! - `fullstack`: enables the fullstack platform. This must be used in combination with the `web` feature for wasm builds and `server` feature for server builds
+//! - `desktop`: enables the desktop platform
+//! - `mobile`: enables the mobile platform
+//! - `web`: enables the web platform. If the fullstack platform is enabled, this will set the fullstack platform to client mode
+//! - `liveview`: enables the liveview platform
+//! - `server`: enables the server variant of dioxus
+#![doc(html_logo_url = "https://avatars.githubusercontent.com/u/79236386")]
+#![doc(html_favicon_url = "https://avatars.githubusercontent.com/u/79236386")]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
+pub use dioxus_core;
+#[doc(inline)]
+pub use dioxus_core::{CapturedError, Ok, Result};
+
+#[cfg(feature = "launch")]
+#[cfg_attr(docsrs, doc(cfg(feature = "launch")))]
+mod launch;
+
+pub use dioxus_core as core;
+#[cfg(feature = "hooks")]
+#[cfg_attr(docsrs, doc(cfg(feature = "hooks")))]
+pub use dioxus_hooks as hooks;
+#[cfg(feature = "signals")]
+#[cfg_attr(docsrs, doc(cfg(feature = "signals")))]
+pub use dioxus_signals as signals;
+
+#[cfg(feature = "launch")]
+#[cfg_attr(docsrs, doc(cfg(feature = "launch")))]
+pub use crate::launch::*;
+
+pub mod events {
+    #[cfg(feature = "html")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "html")))]
+    pub use dioxus_html::events::*;
+}
+
+#[cfg(feature = "cli-config")]
+#[cfg_attr(docsrs, doc(cfg(feature = "cli-config")))]
+pub use dioxus_cli_config as cli_config;
+pub use dioxus_config_macros as config_macros;
+#[cfg(feature = "macro")]
+#[cfg_attr(docsrs, doc(cfg(feature = "macro")))]
+pub use dioxus_core_macro as core_macro;
+#[cfg(feature = "desktop")]
+#[cfg_attr(docsrs, doc(cfg(feature = "desktop")))]
+pub use dioxus_desktop as desktop;
+#[cfg(feature = "mobile")]
+#[cfg_attr(docsrs, doc(cfg(feature = "mobile")))]
+pub use dioxus_desktop as mobile;
+#[cfg(feature = "devtools")]
+#[cfg_attr(docsrs, doc(cfg(feature = "devtools")))]
+pub use dioxus_devtools as devtools;
+#[cfg(feature = "document")]
+#[cfg_attr(docsrs, doc(cfg(feature = "document")))]
+pub use dioxus_document as document;
+#[cfg(feature = "fullstack")]
+#[cfg_attr(docsrs, doc(cfg(feature = "fullstack")))]
+pub use dioxus_fullstack as fullstack;
+#[cfg(feature = "document")]
+#[cfg_attr(docsrs, doc(cfg(feature = "document")))]
+pub use dioxus_history as history;
+#[cfg(feature = "html")]
+#[cfg_attr(docsrs, doc(cfg(feature = "html")))]
+pub use dioxus_html as html;
+#[cfg(feature = "liveview")]
+#[cfg_attr(docsrs, doc(cfg(feature = "liveview")))]
+pub use dioxus_liveview as liveview;
+#[cfg(feature = "logger")]
+#[cfg_attr(docsrs, doc(cfg(feature = "logger")))]
+pub use dioxus_logger as logger;
+#[cfg(feature = "router")]
+#[cfg_attr(docsrs, doc(cfg(feature = "router")))]
+pub use dioxus_router as router;
+#[cfg(feature = "server")]
+#[cfg_attr(docsrs, doc(cfg(feature = "server")))]
+pub use dioxus_server as server;
+#[cfg(feature = "ssr")]
+#[cfg_attr(docsrs, doc(cfg(feature = "ssr")))]
+pub use dioxus_ssr as ssr;
+#[cfg(feature = "web")]
+#[cfg_attr(docsrs, doc(cfg(feature = "web")))]
+pub use dioxus_web as web;
+pub use subsecond;
+#[cfg(feature = "warnings")]
+#[cfg_attr(docsrs, doc(cfg(feature = "warnings")))]
+pub use warnings;
+#[cfg(feature = "wasm-split")]
+#[cfg_attr(docsrs, doc(cfg(feature = "wasm-split")))]
+pub use wasm_splitter as wasm_split;
+
+pub mod prelude {
+    #[cfg(feature = "launch")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "launch")))]
+    pub use dioxus_config_macro::*;
+    pub use dioxus_core;
+    #[doc(inline)]
+    pub use dioxus_core::{
+        Attribute, Callback, Component, Context, Element, ErrorBoundary, ErrorContext, Event,
+        EventHandler, Fragment, HasAttributes, IntoDynNode, RenderError, ScopeId, SuspenseBoundary,
+        SuspenseContext, SuspenseExtension, VNode, VirtualDom, consume_context, provide_context,
+        spawn, suspend, try_consume_context, use_hook,
+    };
+    #[cfg(feature = "macro")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "macro")))]
+    #[allow(deprecated)]
+    #[doc(inline)]
+    pub use dioxus_core_macro::{Props, component, rsx};
+    #[cfg(feature = "devtools")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "devtools")))]
+    pub use dioxus_devtools;
+    #[cfg(feature = "document")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "document")))]
+    #[doc(inline)]
+    pub use dioxus_document as document;
+    #[cfg(feature = "html")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "html")))]
+    #[doc(inline)]
+    pub use dioxus_elements::{Code, Key, Location, Modifiers};
+    #[cfg(feature = "html")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "html")))]
+    #[doc(no_inline)]
+    pub use dioxus_elements::{
+        GlobalAttributesExtension, SvgAttributesExtension, events::*, extensions::*,
+        global_attributes, keyboard_types, svg_attributes, traits::*,
+    };
+    #[cfg(feature = "fullstack")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "fullstack")))]
+    #[doc(inline)]
+    pub use dioxus_fullstack::{
+        ServerFnError, ServerFnResult, server, server_fn, use_server_cached, use_server_future,
+    };
+    #[cfg(feature = "document")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "document")))]
+    #[doc(inline)]
+    pub use dioxus_history::{History, history};
+    #[cfg(feature = "html")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "html")))]
+    pub use dioxus_html as dioxus_elements;
+    #[cfg(feature = "router")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "router")))]
+    pub use dioxus_router;
+    #[cfg(feature = "router")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "router")))]
+    #[doc(inline)]
+    pub use dioxus_router::{
+        GoBackButton, GoForwardButton, Link, NavigationTarget, Outlet, Routable, Router, hooks::*,
+        navigator, use_navigator,
+    };
+    #[cfg(feature = "server")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "server")))]
+    #[doc(inline)]
+    pub use dioxus_server::{
+        DioxusRouterExt, DioxusRouterFnExt, FromContext, ServeConfig, extract,
+    };
+    #[cfg(feature = "signals")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "signals")))]
+    #[doc(inline)]
+    pub use dioxus_signals::*;
+    #[cfg(feature = "asset")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "asset")))]
+    #[doc(inline)]
+    pub use manganis::{self, *};
+    #[cfg(feature = "wasm-split")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "wasm-split")))]
+    pub use wasm_splitter as wasm_split;
+
+    #[cfg(feature = "hooks")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "hooks")))]
+    #[doc(inline)]
+    pub use crate::hooks::*;
+    #[cfg(feature = "launch")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "launch")))]
+    #[doc(inline)]
+    pub use crate::launch::*;
+}

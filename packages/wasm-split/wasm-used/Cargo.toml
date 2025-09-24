@@ -1,0 +1,16 @@
+[package]
+name = "wasm-used"
+edition = "2024"
+version = "0.7.0-alpha.2"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+description = "wasm-used implementation for Rust"
+keywords = ["wasm", "wasm-used", "wasm-split", "dioxus" ]
+
+[dependencies]
+walrus = { version = "0.23.3", features = ["parallel"] }
+id-arena = "2.2.1"
+tracing = "0.1.41"

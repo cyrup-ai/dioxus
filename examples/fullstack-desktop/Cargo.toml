@@ -1,0 +1,15 @@
+[package]
+name = "fullstack-desktop-example"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+publish = false
+
+[dependencies]
+dioxus = { path = "../../packages/dioxus", features = ["launch", "fullstack"] }
+serde = "1.0.226"
+
+[features]
+default = []
+server = ["dioxus/server"]
+desktop = ["dioxus/desktop"]

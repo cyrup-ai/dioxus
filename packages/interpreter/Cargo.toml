@@ -1,0 +1,47 @@
+[package]
+name = "dioxus-interpreter-js"
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+authors = ["Jonathan Kelley"]
+description = "JS Interpreter for Dioxus - a concurrent renderer-agnostic Virtual DOM for interactive user experiences"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+documentation = "https://docs.rs/dioxus"
+keywords = ["dom", "ui", "gui", "react", "wasm"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.103", optional = true }
+wasm-bindgen-futures = { version = "0.4.53", optional = true }
+js-sys = { version = "0.3.80", optional = true }
+web-sys = { version = "0.3.80", optional = true, features = [
+    "Element",
+    "Node",
+] }
+sledgehammer_bindgen = { version = "0.6.0", default-features = false, optional = true }
+sledgehammer_utils = { version = "0.3.1", optional = true }
+serde = { version = "1.0.226", features = ["derive"], optional = true }
+rustc-hash = { version = "2.1.1", optional = true }
+
+dioxus-core = { path = "../core", optional = true }
+dioxus-core-types = { path = "../core-types", optional = true }
+dioxus-html = { path = "../html", optional = true }
+
+[build-dependencies]
+lazy-js-bundle = { path = "../lazy-js-bundle" }
+
+[features]
+default = []
+serialize = ["dep:serde"]
+sledgehammer = ["dep:sledgehammer_bindgen", "dep:sledgehammer_utils", "dep:rustc-hash"]
+webonly = [
+    "sledgehammer",
+    "dep:wasm-bindgen",
+    "dep:wasm-bindgen-futures",
+    "dep:js-sys",
+    "dep:web-sys",
+    "sledgehammer_bindgen/web",
+]
+binary-protocol = ["sledgehammer", "dep:dioxus-core", "dep:dioxus-core-types", "dep:dioxus-html"]
+minimal_bindings = []

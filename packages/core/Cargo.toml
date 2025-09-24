@@ -1,0 +1,48 @@
+[package]
+name = "dioxus-core"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley"]
+edition = "2024"
+description = "Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["web", "desktop", "mobile", "gui", "wasm"]
+
+[dependencies]
+dioxus-core-types = { path = "../core-types" }
+const_format = "0.2.34"
+futures-channel = "0.3.31"
+generational-box = { path = "../generational-box" }
+longest-increasing-subsequence = "0.1.0"
+rustc-hash = "2.1.1"
+rustversion = "1.0.22"
+slab = "0.4.11"
+slotmap = { version = "1.0.7", features = ["serde"] }
+tracing = "0.1.41"
+warnings = "0.2.1"
+futures-util = { version = "0.3.31", default-features = false, features = ["alloc", "std"] }
+serde = { version = "1.0.226", optional = true, features = ["derive"] }
+subsecond = { path = "../subsecond/subsecond" }
+
+[dev-dependencies]
+dioxus = { path = "../dioxus" }
+dioxus-ssr = { path = "../ssr" }
+dioxus-html = { path = "../html", features = ["serialize"] }
+tokio = { version = "1.47.1", features = ["full"] }
+rand = "0.9.2"
+reqwest = { path = "../../../reqwest" }
+tracing-subscriber = { version = "0.3.20", default-features = true }
+tracing-fluent-assertions = "0.3.0"
+pretty_assertions = "1.4.1"
+sysinfo = "0.37.0"
+
+[dev-dependencies.web-sys]
+version = "0.3.80"
+features = ["Document", "HtmlElement", "Window"]
+
+[features]
+serialize = ["dep:serde"]
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

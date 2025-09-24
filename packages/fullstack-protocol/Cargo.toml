@@ -1,0 +1,20 @@
+[package]
+name = "dioxus-fullstack-protocol"
+edition = "2024"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+description = "Fullstack protocol for Dioxus: Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["web", "desktop", "mobile", "gui", "server"]
+
+[dependencies]
+ciborium = "0.2.2"
+dioxus-core = { path = "../core" }
+base64 = "0.22.1"
+serde = "1.0.226"
+tracing = "0.1.41"
+
+[features]
+web = []

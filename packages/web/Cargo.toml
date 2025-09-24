@@ -1,0 +1,127 @@
+[package]
+name = "dioxus-web"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley"]
+edition = "2024"
+description = "Web-sys renderer for Dioxus: Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/learn/0.6/getting_started"
+keywords = ["dom", "ui", "gui", "web", "wasm"]
+
+[dependencies]
+dioxus-core = { path = "../core" }
+dioxus-core-types = { path = "../core-types" }
+dioxus-cli-config = { path = "../cli-config", features = ["web"] }
+dioxus-html = { path = "../html" }
+dioxus-history = { path = "../history" }
+dioxus-document = { path = "../document" }
+dioxus-devtools = { path = "../devtools" }
+dioxus-signals = { path = "../signals" }
+dioxus-interpreter-js = { path = "../interpreter", features = [
+    "minimal_bindings",
+    "webonly",
+] }
+dioxus-fullstack-protocol = { path = "../fullstack-protocol", features = ["web"], optional = true }
+generational-box = { path = "../generational-box" }
+
+js-sys = "0.3.80"
+wasm-bindgen = "0.2.103"
+wasm-bindgen-futures = "0.4.53"
+tracing = "0.1.41"
+rustc-hash = "2.1.1"
+futures-util = { version = "0.3.31", features = ["std", "async-await", "async-await-macro"] }
+futures-channel = "0.3.31"
+serde_json = { version = "1.0", optional = true }
+serde = { version = "1.0", optional = true }
+serde-wasm-bindgen = { version = "0.6.5", optional = true }
+
+ciborium = { version = "0.2.2", optional = true }
+async-trait = { version = "0.1.89", optional = true }
+gloo-timers = { version = "0.3.0", optional = true, features = ["futures"] }
+
+[dependencies.web-sys]
+version = "0.3.80"
+features = [
+    "AnimationEvent",
+    "ClipboardEvent",
+    "CloseEvent",
+    "Comment",
+    "CompositionEvent",
+    "console",
+    "CustomEvent",
+    "DataTransfer",
+    "Document",
+    "DomRectReadOnly",
+    "DragEvent",
+    "FocusEvent",
+    "History",
+    "HtmlElement",
+    "HtmlFormElement",
+    "HtmlHeadElement",
+    "HtmlInputElement",
+    "HtmlSelectElement",
+    "HtmlTextAreaElement",
+    "IntersectionObserverEntry",
+    "InputEvent",
+    "KeyboardEvent",
+    "MouseEvent",
+    "NodeList",
+    "PointerEvent",
+    "ResizeObserverEntry",
+    "ResizeObserverSize",
+    "ScrollRestoration",
+    "ScrollToOptions",
+    "Text",
+    "Touch",
+    "TouchEvent",
+    "TouchList",
+    "TransitionEvent",
+    "WheelEvent",
+    "Window",
+]
+
+[build-dependencies]
+lazy-js-bundle = { path = "../lazy-js-bundle" }
+
+[features]
+default = ["mounted", "file_engine", "devtools", "document"]
+hydrate = ["web-sys/Comment", "dep:serde", "dep:dioxus-fullstack-protocol"]
+mounted = [
+    "web-sys/Element",
+    "dioxus-html/mounted",
+    "web-sys/Element",
+    "web-sys/DomRect",
+    "web-sys/ScrollIntoViewOptions",
+    "web-sys/ScrollLogicalPosition",
+    "web-sys/ScrollBehavior",
+    "web-sys/HtmlElement",
+]
+file_engine = [
+    "dioxus-html/file_engine",
+    "dep:async-trait",
+    "web-sys/File",
+    "web-sys/FileList",
+    "web-sys/FileReader"
+]
+devtools = [
+  "web-sys/MessageEvent",
+  "web-sys/WebSocket",
+  "web-sys/Location",
+  "dep:serde_json",
+  "dep:serde",
+  "dioxus-core/serialize",
+  "dep:gloo-timers"
+]
+document = ["dep:serde-wasm-bindgen", "dep:serde_json", "dep:serde"]
+
+[dev-dependencies]
+dioxus = { path = "../dioxus", default-features = true }
+wasm-bindgen-test = "0.3.53"
+dioxus-ssr = { path = "../ssr", default-features = false }
+gloo-dialogs = "0.2.0"
+dioxus-web = { path = ".", features = ["hydrate"] }
+tracing-wasm = "0.2.1"
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

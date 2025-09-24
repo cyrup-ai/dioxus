@@ -1,0 +1,38 @@
+[package]
+name = "dioxus-signals"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+version = "0.7.0-alpha.2"
+edition = "2024"
+resolver = "3"
+description = "Reactivie signals for Dioxus: Build fullstack web, desktop, and mobile apps with a single codebase."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+keywords = ["dom", "ui", "gui", "react", "wasm"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus-core = { path = "../core" }
+generational-box = { path = "../generational-box" }
+tracing = "0.1.41"
+serde = { version = "1.0.226", features = ["derive"], optional = true }
+parking_lot = "0.12.4"
+rustc-hash = "2.1.1"
+futures-channel = "0.3.31"
+futures-util = "0.3.31"
+warnings = "0.2.1"
+
+[dev-dependencies]
+dioxus = { path = "../dioxus" }
+tokio = { version = "1.47.1", features = ["full"] }
+tracing-subscriber = { version = "0.3.20", default-features = true }
+reqwest = { path = "../../../reqwest" }
+rand = "0.9.2"
+
+[features]
+default = []
+serialize = ["dep:serde"]
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

@@ -1,0 +1,17 @@
+[package]
+name = "dioxus-cli-config"
+edition = "2024"
+resolver = "3"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Evan Almloff"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com"
+description = "CLI Configuration for dioxus-cli"
+keywords = ["web", "desktop", "mobile", "gui", "wasm"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.103", optional = true }
+
+[features]
+web = ["dep:wasm-bindgen"]

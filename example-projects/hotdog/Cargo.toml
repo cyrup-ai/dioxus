@@ -1,0 +1,21 @@
+[package]
+name = "hotdog"
+version = "0.1.0"
+authors = ["Dioxus Labs"]
+edition = "2024"
+resolver = "3"
+publish = false
+
+[dependencies]
+dioxus = { path = "../../packages/dioxus", features = ["fullstack", "router"] }
+reqwest = { path = "../../../reqwest", features = ["json"] }
+serde = { version = "1.0.226", features = ["derive"] }
+serde_json = "1.0.145"
+rusqlite = { version = "0.37.0", optional = true }
+
+[features]
+default = ["web"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
+server = ["dioxus/server", "dep:rusqlite"]

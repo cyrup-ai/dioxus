@@ -1,0 +1,44 @@
+[package]
+name = "dioxus-native-dom"
+version = "0.7.0-alpha.2"
+authors = ["Jonathan Kelley", "Nico Burns"]
+edition = "2024"
+resolver = "3"
+description = "Core headless native renderer for Dioxus based on blitz"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DioxusLabs/dioxus/"
+homepage = "https://dioxuslabs.com/learn/0.6/getting_started"
+keywords = ["dom", "ui", "gui", "react"]
+
+[features]
+default = ["accessibility", "tracing", "svg", "system-fonts"]
+svg = ["blitz-dom/svg"]
+accessibility = ["blitz-dom/accessibility"]
+tracing = ["dep:tracing", "blitz-dom/tracing"]
+system-fonts = ["blitz-dom/system_fonts"]
+autofocus = []
+
+[dependencies]
+# Blitz dependencies
+blitz-dom = { path = "../../../blitz/packages/blitz-dom", default-features = false }
+blitz-traits = { path = "../../../blitz/packages/blitz-traits" }
+
+# DioxusLabs dependencies
+dioxus-core = { path = "../core" }
+dioxus-html = { path = "../html" }
+
+# Windowing & Input
+keyboard-types = { version = "0.8.1" }
+
+
+# Other dependencies
+tracing = { version = "0.1.41", optional = true }
+rustc-hash = "2.1.1"
+futures-util = "0.3.31"
+
+[dev-dependencies]
+dioxus = { path = "../dioxus" }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
