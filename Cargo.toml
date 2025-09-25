@@ -201,14 +201,14 @@ depinfo = { path = "packages/depinfo", version = "0.7.0-alpha.3" }
 warnings = { version = "0.2.1" }
 
 # blitz
-blitz-dom = { path = "../blitz/packages/blitz-dom", default-features = false }
-blitz-net = { path = "../blitz/packages/blitz-net" }
-blitz-paint = { path = "../blitz/packages/blitz-paint" }
-blitz-traits = { path = "../blitz/packages/blitz-traits" }
-blitz-shell = { path = "../blitz/packages/blitz-shell", default-features = false }
-anyrender = { path = "../blitz/packages/anyrender", default-features = false }
-anyrender_vello = { path = "../blitz/packages/anyrender_vello", default-features = false }
-wgpu = { path = "../wgpu/wgpu" }
+blitz-dom = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-dom", default-features = false }
+blitz-net = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-net" }
+blitz-paint = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-paint" }
+blitz-traits = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-traits" }
+blitz-shell = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-shell", default-features = false }
+anyrender = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender", default-features = false }
+anyrender_vello = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender_vello", default-features = false }
+wgpu = { git = "https://github.com/cyrup-ai/wgpu", branch = "main", package = "wgpu" }
 
 # a fork of pretty please for tests - let's get off of this if we can!
 prettier-please = { version = "0.3.0", features = ["verbatim"] }
