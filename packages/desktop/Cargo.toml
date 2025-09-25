@@ -45,7 +45,7 @@ dioxus-hooks = { path = "../hooks" }
 futures-util = "0.3.31"
 percent-encoding = "2.3.2"
 async-trait = "0.1.89"
-tao = { git = "https://github.com/cyrup-ai/tao", branch = "main", features = ["rwh_05"] }
+tao = { git = "https://github.com/cyrup-ai/tao", branch = "main", features = ["rwh_06"] }
 dioxus-history = { path = "../history" }
 base64 = "0.22.1"
 libc = "0.2.176"

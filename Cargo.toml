@@ -324,7 +324,7 @@ memfd = "0.6.5"
 
 # desktop
 wry = { path = "../wry", default-features = false }
-tao = { git = "https://github.com/cyrup-ai/tao", branch = "main", features = ["rwh_05"] }
+tao = { git = "https://github.com/cyrup-ai/tao", branch = "main", features = ["rwh_06"] }
 infer = "0.19.0"
 dunce = "1.0.5"
 percent-encoding = "2.3.2"
