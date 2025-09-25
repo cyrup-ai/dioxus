@@ -139,6 +139,24 @@ impl ApplicationHandler<BlitzShellEvent> for DioxusNativeApplication {
             doc.vdom
                 .in_runtime(move || ScopeId::ROOT.provide_context(renderer));
 
+            // Initialize text system with GPU context now that renderer is active
+            if let (Some(device_handle), Some(surface_format)) = (
+                window.renderer.inner.borrow().current_device_handle(),
+                window.renderer.inner.borrow().current_surface_format(),
+            ) {
+                if let Err(e) = doc.inner.initialize_text_system_with_gpu_context(
+                    &device_handle.device,
+                    &device_handle.queue,
+                    surface_format,
+                    wgpu::MultisampleState::default(),
+                    None, // No depth stencil needed for text rendering
+                ) {
+                    tracing::error!("Failed to initialize text system with GPU context: {}", e);
+                }
+            } else {
+                tracing::warn!("GPU context not available for text system initialization");
+            }
+
             // Queue rebuild
             doc.initial_build();
 
