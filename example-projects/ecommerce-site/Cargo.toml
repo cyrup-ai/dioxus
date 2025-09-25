@@ -7,7 +7,7 @@ publish = false
 
 [dependencies]
 dioxus = { path = "../../packages/dioxus", features = ["fullstack", "router"] }
-reqwest = { path = "../../../reqwest", features = ["json"] }
+reqwest = { git = "https://github.com/cyrup-ai/reqwest", branch = "main", features = ["json"] }
 serde = "1.0.226"
 
 [target.'cfg(target_family = "wasm")'.dependencies]

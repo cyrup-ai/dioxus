@@ -10,6 +10,6 @@ publish = false
 dioxus = { path = "../../dioxus", features = ["web"] }
 
 [build-dependencies]
-reqwest = { path = "../../../../reqwest", features = ["blocking"] }
+reqwest = { git = "https://github.com/cyrup-ai/reqwest", branch = "main", features = ["blocking"] }
 flate2 = "1.1.2"
 tar = "0.4.44"

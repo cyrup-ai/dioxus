@@ -9,7 +9,7 @@ publish = false
 [dependencies]
 dioxus = { path = "../../packages/dioxus", features = ["fullstack"]}
 serde = "1.0.226"
-reqwest = { path = "../../../reqwest" }
+reqwest = { git = "https://github.com/cyrup-ai/reqwest", branch = "main" }
 
 [features]
 default = []

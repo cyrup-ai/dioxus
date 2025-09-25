@@ -12,14 +12,14 @@ tracing = ["dep:tracing-subscriber", "dioxus-native-dom/tracing"]
 [dependencies]
 dioxus = { path = "../../packages/dioxus", default-features = false, features = ["html", "hooks", "signals"] }
 dioxus-native-dom = { path = "../../packages/native-dom" }
-anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
-vello = { path = "../../../vello" }
+anyrender_vello = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender_vello" }
+vello = { git = "https://github.com/cyrup-ai/vello", branch = "main" }
 rustc-hash = "2"
 futures-util = "0.3.31"
 tracing-subscriber = { version = "0.3.20", optional = true }
-wgpu = { path = "../../../wgpu/wgpu" }
+wgpu = { git = "https://github.com/cyrup-ai/wgpu", branch = "main", package = "wgpu" }
 pollster = "0.4"
 bytemuck = "1"
-blitz-paint = { path = "../../../blitz/packages/blitz-paint", default-features = true }
-blitz-traits = { path = "../../../blitz/packages/blitz-traits", default-features = true }
-blitz-dom = { path = "../../../blitz/packages/blitz-dom", default-features = true }
+blitz-paint = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-paint", default-features = true }
+blitz-traits = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-traits", default-features = true }
+blitz-dom = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-dom", default-features = true }

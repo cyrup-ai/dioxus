@@ -31,7 +31,7 @@ dioxus-core = { path = "../core" }
 dioxus = { path = "../dioxus" }
 web-sys = { version = "0.3.80", features = ["Document", "Window", "Element"] }
 tokio = { version = "1.47.1", features = ["full"] }
-reqwest = { path = "../../../reqwest" }
+reqwest = { git = "https://github.com/cyrup-ai/reqwest", branch = "main" }
 
 [package.metadata.docs.rs]
 cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]

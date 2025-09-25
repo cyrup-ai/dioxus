@@ -15,16 +15,16 @@ tracing = ["dep:tracing-subscriber", "dioxus-native-dom/tracing"]
 [dependencies]
 dioxus = { path = "../../packages/dioxus" }
 dioxus-native-dom = { path = "../../packages/native-dom" }
-blitz-dom = { path = "../../../blitz/packages/blitz-dom", default-features = true }
-blitz-paint = { path = "../../../blitz/packages/blitz-paint", default-features = true }
-blitz-traits = { path = "../../../blitz/packages/blitz-traits", default-features = true }
-anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
-wgpu = { path = "../../../wgpu/wgpu" }
+blitz-dom = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-dom", default-features = true }
+blitz-paint = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-paint", default-features = true }
+blitz-traits = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-traits", default-features = true }
+anyrender_vello = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender_vello" }
+wgpu = { git = "https://github.com/cyrup-ai/wgpu", branch = "main", package = "wgpu" }
 tracing-subscriber = { version = "0.3.20", optional = true }
 bevy = { version = "0.16" }
 async-std = "1.13"
 crossbeam-channel = "0.5"
 paste = "1.0"
 rustc-hash = "2"
-vello = { path = "../../../vello" }
+vello = { git = "https://github.com/cyrup-ai/vello", branch = "main" }
 

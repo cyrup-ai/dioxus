@@ -20,8 +20,8 @@ autofocus = []
 
 [dependencies]
 # Blitz dependencies
-blitz-dom = { path = "../../../blitz/packages/blitz-dom", default-features = false }
-blitz-traits = { path = "../../../blitz/packages/blitz-traits" }
+blitz-dom = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-dom", default-features = false }
+blitz-traits = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-traits" }
 
 # DioxusLabs dependencies
 dioxus-core = { path = "../core" }
