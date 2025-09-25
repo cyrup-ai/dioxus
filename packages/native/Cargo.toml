@@ -23,13 +23,13 @@ autofocus = []
 
 [dependencies]
 # Blitz dependencies
-anyrender = { path = "../../../blitz/packages/anyrender" }
-anyrender_vello = { path = "../../../blitz/packages/anyrender_vello" }
-blitz-dom = { path = "../../../blitz/packages/blitz-dom" }
-blitz-net = { path = "../../../blitz/packages/blitz-net", optional = true }
-blitz-paint = { path = "../../../blitz/packages/blitz-paint", optional = true }
-blitz-traits = { path = "../../../blitz/packages/blitz-traits" }
-blitz-shell = { path = "../../../blitz/packages/blitz-shell" }
+anyrender = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender" }
+anyrender_vello = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "anyrender_vello" }
+blitz-dom = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-dom" }
+blitz-net = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-net", optional = true }
+blitz-paint = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-paint", optional = true }
+blitz-traits = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-traits" }
+blitz-shell = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-shell" }
 
 # DioxusLabs dependencies
 dioxus-core = { path = "../core" }
