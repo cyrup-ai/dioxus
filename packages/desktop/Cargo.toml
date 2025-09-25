@@ -26,7 +26,7 @@ serde = "1.0.226"
 serde_json = "1.0.145"
 thiserror = "2.0.16"
 tracing = "0.1.41"
-wry = { path = "../../../wry", default-features = false, features = ["os-webview", "protocol", "drag-drop"] }
+wry = { git = "https://github.com/cyrup-ai/wry", branch = "main", default-features = false, features = ["os-webview", "protocol", "drag-drop"] }
 futures-channel = "0.3.31"
 tokio = { version = "1.47.1", features = [
   "sync",
@@ -45,7 +45,7 @@ dioxus-hooks = { path = "../hooks" }
 futures-util = "0.3.31"
 percent-encoding = "2.3.2"
 async-trait = "0.1.89"
-tao = { path = "../../../tao", features = ["rwh_05"] }
+tao = { git = "https://github.com/cyrup-ai/tao", branch = "main", features = ["rwh_05"] }
 dioxus-history = { path = "../history" }
 base64 = "0.22.1"
 libc = "0.2.176"
@@ -57,7 +57,7 @@ webbrowser = { version = "1.0" }
 signal-hook = "0.3.18"
 
 [target.'cfg(target_os = "linux")'.dependencies]
-wry = { path = "../../../wry", features = ["os-webview", "protocol", "drag-drop", "linux-body"] }
+wry = { git = "https://github.com/cyrup-ai/wry", branch = "main", features = ["os-webview", "protocol", "drag-drop", "linux-body"] }
 
 [target.'cfg(any(target_os = "windows",target_os = "macos",target_os = "linux",target_os = "dragonfly", target_os = "freebsd", target_os = "netbsd", target_os = "openbsd"))'.dependencies]
 global-hotkey = "0.7.0"
