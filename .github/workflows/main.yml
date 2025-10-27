@@ -255,7 +255,7 @@ jobs:
           npm install -D @playwright/test
           npx playwright install --with-deps
           npx playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-report-${{ matrix.platform.toolchain }}-${{ runner.os }}
@@ -499,7 +499,7 @@ jobs:
   #         cargo build --release --package dioxus-cli --target ${{ matrix.platform.target }}
 
   #     - name: Upload CLI binaries
-  #       uses: actions/upload-artifact@v4
+  #       uses: actions/upload-artifact@v5
   #       if: always()
   #       with:
   #         name: dx-${{ matrix.platform.target }}-${{ github.event.number || github.ref_name }}
